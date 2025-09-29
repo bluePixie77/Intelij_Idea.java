@@ -1,5 +1,4 @@
-package POO.SimulacioMemoriaRAMSwapping;
-
+package POO.SimulacioMemoriaRAMSwapping2;
 import processing.core.PApplet;
 
 public class Memory {
@@ -8,14 +7,19 @@ public class Memory {
     int mida;
     Proces[] procesos;
     int numProcesos;
-    int freeAddress;
+
+    Hole[] holes;
+    int numHoles;
 
     // Constructor
     Memory(int m){
         this.mida = m;
         this.procesos = new Proces[100];
         this.numProcesos = 0;
-        this.freeAddress = 0;
+
+        this.numHoles = 0;
+        holes = new Hole[100];
+        addHole(0, this.mida);
     }
 
     // Altres mètodes
@@ -36,6 +40,9 @@ public class Memory {
         int nP = numProcessos();
         p5.text("Num Procesos Actius: "+nP, 100, 620);
 
+        int nF = numForats();
+        p5.text("Num Forats: "+nF, 100, 660);
+
         for(int i=0; i<procesos.length; i++){
             if(procesos[i] != null) {
                 procesos[i].display(p5, 100, 100, 300);
@@ -52,28 +59,43 @@ public class Memory {
         }
         return memoriaOcupada;
     }
+
     void swapIn(Proces p){
-        if(freeAddress+p.mida < mida){
-            procesos[numProcesos] = p;
-            numProcesos++;
-            p.setAddress(freeAddress);
-            freeAddress += p.mida;
-        }else{
-            System.out.println("ERROR de SWAP IN del procés "+p.nom+".");
+        boolean swapped = false;
+        for(int i=0; i<numHoles && !swapped; i++){
+            if(holes[i]!=null && holes[i].mida>=p.mida){
+                int espaiRestant = holes[i].mida - p.mida;
+                procesos[numProcesos] = p;
+                procesos[numProcesos].setAddress(holes[i].address);
+                numProcesos++;
+                swapped = true;
+                System.out.println("SWAPPED IN " + p.nom);
+
+                holes[i].address = holes[i].address + p.mida;
+                holes[i].mida = espaiRestant;
+                if(holes[i].mida == 0){
+                    holes[i] = null;
+                    System.out.println("Hole Removed");
+                }
+            }
+        }
+        if(!swapped){
+            System.out.println("Error SWAP IN del procés "+p.nom);
         }
     }
 
     void swapOut(Proces p){
         for(int i=0; i<numProcesos; i++){
             if(procesos[i] == p){
+                addHole(p.address, p.mida);
                 procesos[i] = null;
-                numProcesos--;
+                // numProcesos--;
                 System.out.println("SWAPPED OUT "+p.nom);
             }
         }
     }
 
-    int numProcessos(){
+    int numProcessos(){     // no necessari pq tenim variable numProcessos, però per practicar
         int numProcesos = 0;
         for(int i=0; i<procesos.length; i++){
             if(procesos[i] != null){
@@ -81,5 +103,21 @@ public class Memory {
             }
         }
         return numProcesos;
+    }
+
+    void addHole(int address, int mida){
+        holes[numHoles] = new Hole(address, mida);
+        numHoles++;
+        System.out.println("New Hole");
+    }
+
+    int numForats(){
+        int nF = 0;
+        for(int i=0; i<holes.length; i++){
+            if(holes[i] != null){
+                nF++;
+            }
+        }
+        return nF;
     }
 }
