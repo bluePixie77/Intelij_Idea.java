@@ -3,7 +3,7 @@ import processing.core.PApplet;
 
 public class Main3 extends PApplet {
     public static void main(String[] args) {
-        PApplet.main("POO.SimulacioMemoriaRAMSwapping3.Main");
+        PApplet.main("POO.SimulacioMemoriaRAMSwapping3.Main3");
     }
 
     // Atributs
@@ -50,6 +50,12 @@ public class Main3 extends PApplet {
         }
         else if(frameCount == 700){
             memory.swapIn(p5);
+        }
+    }
+
+    public void keyPressed(){
+        if(key == 'c' || key== 'C'){
+            memory.compacta();
         }
     }
 }

@@ -130,4 +130,92 @@ public class Memory {
             holes[n1] = null;
         }
     }
+    public int getHoleMinAddress(){
+        int minAddress = mida;
+        int posicio = -1;
+        for(int i=0; i<numHoles; i++){
+            if(holes[i]!=null &&
+               holes[i].address<minAddress){
+                minAddress = holes[i].address;
+                posicio = i;
+            }
+        }
+        return posicio;
+    }
+    public int getProcesMinAddress(int posterior, int midaMin){
+        int minAddress = mida;
+        int posicio = -1;
+        for(int i=0; i<numProcesos; i++){
+            if(procesos[i] != null &&
+                    procesos[i].address < minAddress &&
+                    procesos[i].address >= posterior &&
+                    procesos[i].mida <= midaMin){
+                minAddress = procesos[i].address;
+                posicio = i;
+            }
+        }
+        return posicio;
+    }
+    void mouProces(Proces p, int nF){    // nF: num a l'array del forat
+        Hole h = holes[nF];
+        System.out.println("Movent procés "+p.nom+"al forat "+h.address);
+
+        int oldAddress = p.address;
+        p.address = h.address;
+
+        h.address = p.address+p.mida;
+        h.mida = h.mida - p.mida;
+        if(h.mida==0){
+            holes[nF] = null;
+        }
+        addHole(oldAddress, p.mida);
+    }
+
+    void compacta(){
+        System.out.println("Inici de la Compactació de Memòria");
+
+        int minHole;
+        int possible;
+
+        do {
+
+            minHole = getHoleMinAddress();
+            Hole h = holes[minHole];
+            System.out.println(".... Forat amb adreça menor: "+h.address);
+
+            possible = getProcesMinAddress(h.address, h.mida);
+
+            if(possible!=-1){
+                Proces p = procesos[possible];
+                System.out.println(".... Procés amb possibilitat de moure's:"+p.nom);
+                mouProces(p, minHole);
+            }
+
+        } while(possible!=-1);
+
+        System.out.println("...Compactant els forats");
+        boolean compactable;
+        int nh1=-1, nh2=-1;
+        do {
+            compactable = false;
+            for(int i=0; i<numHoles; i++){
+                for(int j=0; j<numHoles; j++){
+                    if(i!=j && holes[i]!=null && holes[j]!=null){
+                        Hole h1 = holes[i];
+                        Hole h2 = holes[2];
+                        if ((h1.address+h1.mida == h2.address) ||
+                                (h2.address+h2.mida == h1.address)){
+                            compactable =true;
+                            nh1 = i; nh2 = j;
+                        }
+                    }
+                }
+            }
+            if(compactable){
+                compactaForats(nh1, nh2);
+            }
+        } while(compactable);
+
+        System.out.println("Final de la Compactació");
+    }
 }
