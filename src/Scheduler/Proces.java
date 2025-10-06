@@ -48,6 +48,4 @@ public class Proces {
             p5.text(numPendingCicles+"/"+numCiclesCPU, x+w/2, y+2*h/3);
         p5.popStyle();
     }
-
-
 }
