@@ -3,7 +3,7 @@ package Scheduler;
 import processing.core.PApplet;
 
 public class Scheduler {
-    enum POLITICA {FIFO, SJF, SRJF, RR}
+    enum POLITICA {FIFO, SJF, SRTF, RR}
 
     // Atributs o propietats
     POLITICA politica;
