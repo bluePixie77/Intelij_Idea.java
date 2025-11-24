@@ -22,7 +22,7 @@ public class Pila {
 
     public int pop(){
         top--;
-        return array[top++];
+        return array[top+1];
     }
 
     public boolean isEmpty(){
