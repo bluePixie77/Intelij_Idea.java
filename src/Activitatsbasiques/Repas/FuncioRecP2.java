@@ -1,6 +1,6 @@
 package Activitatsbasiques.Repas;
 
-public class FuncioRecursivaP2 {
+public class FuncioRecP2 {
     public int alternateSum(int a, int b){
         if(a==0){
             return b;
@@ -11,11 +11,4 @@ public class FuncioRecursivaP2 {
         }
     }
 
-}
-class Main {
-    public static void main(String[] args) {
-        for (int i = 0, j = 10; i <= 10 || j > i; i++, j--) {
-            System.out.println(i + " - " + j);
-        }
-    }
 }
