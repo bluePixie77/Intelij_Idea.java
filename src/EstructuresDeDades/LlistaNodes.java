@@ -19,7 +19,7 @@ public class LlistaNodes {
         return this.head==null && this.tail==null;
     }
 
-    public void prepend(int v){     // Afegir node a l'inici
+    public void preppend(int v){     // Afegir node a l'inici
         if(isEmpty()){
             Node n = new Node(v);
             head = n; tail = n;
@@ -78,14 +78,16 @@ public class LlistaNodes {
     }
 
     public void insertAt(int i, int v){
-        if (i == 0) {
-            prepend(v);
-        }else if(i==numNodes-1){
+        if(i==0){
+            preppend(v);
+        }
+        else if(i==numNodes-1){
             append(v);
-        } else if(i<numNodes){
+        }
+        else if(i<numNodes) {
             int k=0;
             Node nAnt = head;
-            while(k < i-1){
+            while(k<i-1){
                 nAnt = nAnt.seg;
                 k++;
             }
@@ -93,9 +95,61 @@ public class LlistaNodes {
             Node nouNode = new Node(v, nSeg);
             nAnt.seg = nouNode;
             numNodes++;
+
         }
     }
-    public void removeAt(){}
+
+    public int removeFirst(){
+        if(!isEmpty()){
+            int v = head.valor;
+            head = head.seg;
+           /*  Node nPrimer = head; (es lo mateix)
+               head = nPrimer.seg; */
+            return v;
+        }else{
+            return -1;
+        }
+    }
+    public int removeLast(){
+        if(!isEmpty()){
+            int k = 0;
+            Node nAnt = head;
+            while(k < numNodes-1){
+                nAnt = nAnt.seg;
+                k++;
+            }
+            int v = nAnt.seg.valor;
+            nAnt.seg = null;
+            return v;
+        }else{
+            return -1;
+        }
+    }
+
+    public int removeAt(int p){
+        if(!isEmpty() && p<numNodes){
+            int k = 0;
+            Node nAnt = head;
+            while(k<p-1){
+                nAnt = nAnt.seg;
+                k++;
+            }
+            int v = -1;
+            if(numNodes>1){
+                Node n = nAnt.seg;
+                v = n.valor;
+            } else {
+                v = nAnt.valor;
+                head = null;
+                tail = null;
+            }
+            numNodes--;
+            return v;
+        }else{
+            return -1;
+        }
+
+    }
 
     void display(PApplet p5, int x, int y, int wn) {
 
