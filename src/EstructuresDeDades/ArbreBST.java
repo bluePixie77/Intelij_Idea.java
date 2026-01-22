@@ -24,7 +24,7 @@ public class ArbreBST {
     public void addElement(int n){
         if(isEmpty()){
             arrel = new NodeBST(n);
-        }else {
+        } else {
             NodeBST pare = this.arrel;
             while(pare.esq!=null && n<pare.valor ||
                   pare.dret!=null && n>pare.valor){
@@ -37,6 +37,38 @@ public class ArbreBST {
         }
     }
 
+    public boolean cercaElement(int valor, NodeBST n){
+        // Esquerra a dreta
+        if(n==null){
+            return false;   // QUAN HI HA RETURN A UNA CRIDADA RECURSIVA, S'HAN DE FER RETURNS PER TOTES LES CRIDADES
+        } else if(n.valor == valor){
+            return true;
+        } else {
+            if(valor<n.valor && n.esq!=null){
+                return cercaElement(valor, n.esq);
+            } else if(valor>n.valor && n.dret!=null) {
+                return cercaElement(valor, n.dret);
+            }
+            return false;
+        }
+    }
+
+    public int getMinim(){
+        NodeBST pare = this.arrel;
+        while(pare.esq != null){
+            pare = pare.esq;
+        }
+        return pare.valor;
+    }
+    public int getMaxim(){
+        NodeBST pare = this.arrel;
+        while(pare.dret != null){
+            pare = pare.dret;
+        }
+        return pare.valor;
+    }
+
+
     void display(PApplet p5, NodeBST n, float x, float y, float r, int level){
         float dx = (p5.width/3)/(level+2);
         n.display(p5, x, y, r, level);
@@ -48,4 +80,5 @@ public class ArbreBST {
             display(p5, n.dret, x+dx, y + 2*r, r, level +1);
         }
     }
+
 }
