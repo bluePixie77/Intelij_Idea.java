@@ -7,6 +7,7 @@ public class NodeBST {
     // Atributs
     int valor;
     NodeBST esq, dret;
+    boolean visitat = false;
 
     // Constructor
     public NodeBST(int v){
@@ -18,6 +19,7 @@ public class NodeBST {
     // Setters
     public void setFillEsq(NodeBST esq){ this.esq = esq; }
     public void setFillDret(NodeBST dret){ this.dret = dret; }
+    public void setVisitat(boolean v){ this.visitat = v; }
 
     // Altres mètodes
     public void visitar(){

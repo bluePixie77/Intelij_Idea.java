@@ -7,11 +7,10 @@ public class ArbreBST {
     // Atributs o propietats
     NodeBST arrel;
 
-    // Constructor
+    // Constructors
     public ArbreBST(){
         arrel = null;
     }
-
     public ArbreBST(int n){
         this.arrel = new NodeBST(n);
     }
@@ -81,4 +80,29 @@ public class ArbreBST {
         }
     }
 
+    public void bfs(NodeBST node, int valor){  // Breadth First Search (podria fer-se amb arbres no binaris de cerca)
+        CuaNodeBST c = new CuaNodeBST();
+        node.setVisitat(true);
+        c.encola(node);
+        while(!c.isEmpty()){
+            NodeBST nActual = c.desencola();
+            nActual.visitar();
+            if(nActual.valor == valor){
+                System.out.println("TROBAT");
+            }
+            for(NodeBST fill : adjecents(nActual)){  // Bucle for-each (per cada fill, iterar num. adjecents)
+                if(fill!=null && !fill.visitat){
+                    fill.setVisitat(true);
+                    c.encola(fill);
+                }
+            }
+        }
+        System.out.print("\n\n  ");
+    }
+    public NodeBST[] adjecents(NodeBST n){  // array amb fills de node 'n'
+        NodeBST[] nodes = new NodeBST[2];
+        nodes[0] = n.esq;
+        nodes[1] = n.dret;
+        return nodes;
+    }
 }

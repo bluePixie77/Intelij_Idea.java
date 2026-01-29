@@ -35,7 +35,7 @@ public class MainArbreBST extends PApplet {
         fill(0); textSize(18); textAlign(LEFT);
         text("MAX: " +vMax, 100, 100);
         text("MIN: " +vMin, 100, 120);
-        text("CERCA: " +valorCerca+"Resultat: "+resultatCerca, 100, 140);
+        text("CERCA: " +valorCerca+" Resultat: "+resultatCerca, 100, 140);
 
     }
 
@@ -48,6 +48,7 @@ public class MainArbreBST extends PApplet {
             }
             vMax = arbreBST.getMaxim();
             vMin = arbreBST.getMinim();
+            arbreBST.bfs(arbreBST.arrel, vMax); // cerca tot l'arbre
         }
         else if(key=='c' || key== 'c'){
             valorCerca = (int) random(0, 100);
