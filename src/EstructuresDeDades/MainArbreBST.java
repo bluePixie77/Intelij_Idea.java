@@ -48,6 +48,12 @@ public class MainArbreBST extends PApplet {
             }
             vMax = arbreBST.getMaxim();
             vMin = arbreBST.getMinim();
+
+            arbreBST.inordre();
+            arbreBST.preordre();
+            arbreBST.postordre();
+            arbreBST.revers();
+
             arbreBST.bfs(arbreBST.arrel, vMax); // cerca tot l'arbre
         }
         else if(key=='c' || key== 'c'){

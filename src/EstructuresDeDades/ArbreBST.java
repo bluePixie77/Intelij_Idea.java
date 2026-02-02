@@ -81,6 +81,7 @@ public class ArbreBST {
     }
 
     public void bfs(NodeBST node, int valor){  // Breadth First Search (podria fer-se amb arbres no binaris de cerca)
+        System.out.print("\nBFS: ");
         CuaNodeBST c = new CuaNodeBST();
         node.setVisitat(true);
         c.encola(node);
@@ -105,4 +106,10 @@ public class ArbreBST {
         nodes[1] = n.dret;
         return nodes;
     }
+
+    public void inordre(){  System.out.println("\nINORDRE:"); this.arrel.inordre(); }
+    public void preordre(){ System.out.println("\nPREORDRE:"); this.arrel.preordre(); }
+    public void postordre(){ System.out.println("\nPOSTORDRE:"); this.arrel.postordre(); }
+    public void revers(){ System.out.println("\nREVERS:"); this.arrel.revers(); }
+
 }
