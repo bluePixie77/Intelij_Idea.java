@@ -40,7 +40,7 @@ public class MainToString1 {
 
         public boolean equals(Object o){
             Persona po = (Persona)o;
-            if(this.nom.equals(po.nom) && this.edat == po.edat){ // NO recursivitat: po crida el seu propi mètode equals()
+            if(this.nom.equals(po.nom) && this.edat == po.edat){ // NO recursivitat, po crida el seu propi mètode equals()
                 return true;
             }else{
                 return false;
