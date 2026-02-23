@@ -1,19 +1,19 @@
 package Herencia.llistesAbstractes;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
-public class MainArrayList {
+public class MainLinkedList {
 
     public static void main(String[] args) {
 
-        // Declaració de llista d'Array. ArrayList és una classe genèrica (serveix per qualsevol E, element), en aquest cas, de <Integer>s
-        ArrayList<Integer> llistaNums; // Integer és una classe, int és un tipus bàsic
-        ArrayList<Character> llistaLletres;
+        // Declaració de llista de Nodes
+        LinkedList<Integer> llistaNums; // Integer és una classe, int és un tipus bàsic
+        LinkedList<Character> llistaLletres;
         int[] array;
 
         // Creació o instanciació
-        llistaNums = new ArrayList<>(); // = llistaNums = new ArrayList<Integer>();
-        llistaLletres = new ArrayList<>();
+        llistaNums = new LinkedList<>(); // = llistaNums = new ArrayList<Integer>();
+        llistaLletres = new LinkedList<>();
         array = new int[10];
 
         // Afegir elements, addElement
@@ -43,14 +43,6 @@ public class MainArrayList {
             System.out.print(i + ", ");
         }
 
-        /*
-        TIPUS BÀSIC (només té valor)  |  CLASSE (té propietats i mètodes)
-        int                              Integer
-        float                            Float
-        char                             Character
-         */
-
     }
-
 
 }
