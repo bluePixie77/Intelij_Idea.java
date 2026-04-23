@@ -37,4 +37,9 @@ public class ParkingA {
         }
         return pB;
     }
+
+    // POLIMORFISME: Un mètode amb una signatura i paràmetres iguals (mateixa cridada) que existeix en múltiples clases
+    // i pot cridar-se per aquestes diferentes clases
+    public void print(){}
+
 }

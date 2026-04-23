@@ -22,4 +22,6 @@ public class ParkingB {
         vehicles[numVehicles] = v;
         numVehicles++;
     }
+
+    public void print(){}
 }
